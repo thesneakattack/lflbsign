@@ -4,18 +4,16 @@ class="nav-bottom fixed bottom-0 left-0 w-full flex items-center justify-end fon
         <div class="w-full flex items-center justify-end mr-14">
             {{-- ACCESSIBILITY NAV --}}
             @if($navSettings['selectOk'] == true)
-                <div class="flex flex-row text-center mr-6 gap-4 my-2">
+                <div class="flex flex-row text-center mr-16 gap-4 my-2">
                     <a href="#" tabindex="-1" class="bg-buttonPrimary text-white py-2 px-4 rounded tab-prev" onclick="$.tabPrev();return false;"><i class="fa-solid fa-caret-left"></i></a>
                     <a href="#" tabindex="-1" class="bg-buttonTertiary text-white py-2 px-4 rounded tab-select" onclick="return false;">GO</a>
                     <a href="#" tabindex="-1" class="bg-buttonPrimary text-white py-2 px-4 rounded tab-next" onclick="$.tabNext();return false;"><i class="fa-solid fa-caret-right"></i></a>
+                    @if($navSettings['changeTopic'] == true)
+                        <a href="/" tabindex="-1" class="bg-buttonSecondary text-white py-2 px-4 rounded tab-select" onclick="location.href='/'"><i class="fa-solid fa-book"></i> Topics</a>
+                    @endif                 
                 </div>    
             @endif
-            @if($navSettings['changeTopic'] == true)
-                <div class="flex flex-row text-center mr-16 gap-4 my-2">
-                    <a href="/" tabindex="-1" class="bg-buttonSecondary text-white py-2 px-4 rounded tab-select" onclick="location.href='/'"><i class="fa-solid fa-book"></i> Topics</a>
-                </div>    
-            @endif                 
-        </div>    
+        </div>      
         <div class="w-full flex items-center justify-end mr-14">
             {{-- BACK/HOME NAV --}}
             @if($navSettings['backHome'] == true)   

@@ -63,7 +63,7 @@ Route::get('/', function () {
         'navSettings' => [
             "backHome" => true,
             "selectOk" => true,
-            "changeTopic" => true,
+            "changeTopic" => false,
             "scroll" => true // set to 'maybe?'
         ]
     ]);
