@@ -82,7 +82,7 @@ Route::get('/topics/{id}', function($id) {
 
     return view('topic', [
         'topic' => Collection::find($id),
-        'subTopics' => SubCollection::all()->where('parentCollection', $id),
+        'subTopics' => SubCollection::all()->where('parentCollection', $id)->sortBy('position'),
         'homePage' => true,
         'navSettings' => [
             "backHome" => false, //unless non default topic? javascript reset history on fallback to default topic?

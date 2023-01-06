@@ -26,6 +26,24 @@
                                 <img class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['originalImage']) }}" alt="">
                                 <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
                             </div>
+                            @elseif($storyAsset['type'] == 'VIDEO')
+                            <div class="segment-video flex flex-col items-center justify-center text-center">
+                                <video class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['link']) }}" type="video/m4v" controls controlsList="nodownload nofullscreen">
+                                </video>
+                                <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
+                            </div>
+                            @elseif($storyAsset['type'] == 'YOUTUBE')
+                            <div class="segment-youtube flex flex-col items-center justify-center text-center">
+                                <iframe class="w-full aspect-video"
+                                frameborder="0" 
+                                allowfullscreen="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                {{-- title="Firemen fight fire at the Deer Path Inn in Lake Forest, Illinois with water hoses...HD Stock Footage"  --}}
+                                width="100%" 
+                                height="100%" 
+                                src="{{ $storyAsset['link'] }}?autoplay=0&mute=0&controls=1&origin=https://lflbsign.webfoundry.dev&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"></iframe>
+                                <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
+                            </div>                                                           
                             @endif
                         @endforeach  
                     </div>
