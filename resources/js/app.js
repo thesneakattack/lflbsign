@@ -12,6 +12,12 @@ $(() => {
     })); 
 });
 
+Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+    get: function(){
+        return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+    }
+})
+
 function idleLogout() {
     var t;
     window.onload = resetTimer;
@@ -23,24 +29,29 @@ function idleLogout() {
     window.onkeypress = resetTimer;
 
     function logout() {
-        if((typeof defaultTopic === 'undefined')){
-            console.log("CON1");
-            return false;
-        }
-        else{
-            if(typeof homePage === 'undefined'){
-                console.log("CON2");
-                window.location.href = '/topics/' + defaultTopic;
-            }else{
-                if(defaultTopic === userDefinedTopic){
-                    console.log("CON3");
-                    return false;
-                }else{
-                    console.log("CON4");
+        if(document.querySelector('video') && document.querySelector('video').playing){ // checks if element is playing right now
+            console.log("Video playing. Idle timer reset.")
+            resetTimer();
+        }else{
+            if((typeof defaultTopic === 'undefined')){
+                console.log("CON1");
+                return false;
+            }
+            else{
+                if(typeof homePage === 'undefined'){
+                    console.log("CON2");
                     window.location.href = '/topics/' + defaultTopic;
+                }else{
+                    if(defaultTopic === userDefinedTopic){
+                        console.log("CON3");
+                        return false;
+                    }else{
+                        console.log("CON4");
+                        window.location.href = '/topics/' + defaultTopic;
+                    }
                 }
             }
-        }
+        }        
     }
 
     //CON 1: defaultTopic undefined, userDefinedTopic undefined: DO NOTHING

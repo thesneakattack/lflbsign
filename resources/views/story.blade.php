@@ -17,23 +17,24 @@
                     </h3> --}}
                         @foreach($storyAssets as $storyAsset)
                             @if($storyAsset['type'] == 'TEXT')
-                            <div class="segment-text flex flex-col items-justify text-justify text-2xl space-y-6 mx-8">
+                            <div class="segment-text flex flex-col items-justify text-justify text-2xl space-y-6 mx-8 mb-6">
                                 {!!strip_tags($storyAsset['cleanText'], ["<p>", "<span>", "<ul>", "<li>", "<em>", "<strong>", "<b>", "<i>", "<br>"])!!}
                                     {{-- {{$storyAsset['cleanText']}} --}}
                             </div>
                             @elseif($storyAsset['type'] == 'IMAGE')
-                            <div class="segment-image flex flex-col items-center justify-center text-center">
+                            <div class="segment-image flex flex-col items-center justify-center text-center mb-6">
                                 <img class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['originalImage']) }}" alt="">
-                                <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
+                                <p class="text-xl font-semibold">{{$storyAsset['caption']}}</p>
                             </div>
                             @elseif($storyAsset['type'] == 'VIDEO')
-                            <div class="segment-video flex flex-col items-center justify-center text-center">
+                            <div class="segment-video flex flex-col items-center justify-center text-center mb-6">
+                                <p class="text-2xl font-semibold">{{$storyAsset['name']}}</p>
                                 <video class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['link']) }}" type="video/m4v" controls controlsList="nodownload nofullscreen">
                                 </video>
-                                <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
+                                <p class="text-xl font-semibold">{{$storyAsset['caption']}}</p>
                             </div>
                             @elseif($storyAsset['type'] == 'YOUTUBE')
-                            <div class="segment-youtube flex flex-col items-center justify-center text-center">
+                            <div class="segment-youtube flex flex-col items-center justify-center text-center mb-6">
                                 <iframe class="w-full aspect-video"
                                 frameborder="0" 
                                 allowfullscreen="0" 
@@ -42,7 +43,7 @@
                                 width="100%" 
                                 height="100%" 
                                 src="{{ $storyAsset['link'] }}?autoplay=0&mute=0&controls=1&origin=https://lflbsign.webfoundry.dev&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"></iframe>
-                                <p class="mb-6 text-xl font-semibold">{{$storyAsset['caption']}}</p>
+                                <p class="text-xl font-semibold">{{$storyAsset['caption']}}</p>
                             </div>                                                           
                             @endif
                         @endforeach  
