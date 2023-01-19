@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $coverPhoto
  * @property string $subCollections
- * @property string $subCollections_new
  * @property string $featured
  * @property string $introText
  * @property string $bodyText
@@ -31,7 +30,7 @@ class Collection extends Model
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'title', 'description', 'coverPhoto', 'subCollections', 'subCollections_new', 'featured', 'introText', 'bodyText', 'mainImage'];
+    protected $fillable = ['_id', '_oldid', 'title', 'description', 'coverPhoto', 'subCollections', 'featured', 'introText', 'bodyText', 'mainImage'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Asset extends Model
 {
+
+    // protected $table = 'assets_copy';
+
     /**
      * The primary key for the model.
      * 

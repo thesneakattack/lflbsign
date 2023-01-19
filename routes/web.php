@@ -113,7 +113,7 @@ Route::get('/stories/{id}', function($id) {
     $hideTabbableNav = true;
     return view('story', [
         'story' => Story::find($id),
-        'storyAssets' => Story::find($id)->storyAssets()->with('story')->join('assets', 'assets._newid', '=', 'storyAssets.asset')->get(),
+        'storyAssets' => Story::find($id)->storyAssets()->with('story')->join('assets', 'assets._newid', '=', 'story_assets.asset')->get(),
         'hideTabbableNav' => $hideTabbableNav,
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?

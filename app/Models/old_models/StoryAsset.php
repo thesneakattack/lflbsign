@@ -19,6 +19,13 @@ use Illuminate\Database\Eloquent\Model;
 class StoryAsset extends Model
 {
     /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'storyAssets';
+
+    /**
      * The primary key for the model.
      * 
      * @var string
@@ -49,5 +56,5 @@ class StoryAsset extends Model
     public function scopePositionAscending($query)
     {
         return $query->orderBy('position', 'ASC');
-    }    
+    }
 }
