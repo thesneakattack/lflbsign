@@ -1,4 +1,4 @@
 # *
 lflbassets/
-!public/
+!public
 !.gitignore
