@@ -3,7 +3,7 @@
 
     @foreach($apps as $app)
         <h2>
-        <a href="/apps/{{$app['_newid']}}">{{$app['name']}}</a>
+        <a href="/apps/{{$app['id']}}">{{$app['name']}}</a>
         </h2>
         <p>{{$app['description']}}</p>
     @endforeach

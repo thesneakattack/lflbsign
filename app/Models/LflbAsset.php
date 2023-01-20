@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $_newid
- * @property string $_id
+ * @property integer $id
  * @property string $_oldid
  * @property string $orgId
  * @property string $link
@@ -18,27 +17,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $caption
  * @property string $tags
  * @property string $thumbnail
- * @property StoryAsset[] $storyAssets
+ * @property LflbStoryAsset[] $lflbStoryAssets
  */
-class Asset extends Model
+class LflbAsset extends Model
 {
     /**
-     * The primary key for the model.
+     * Indicates if the IDs are auto-incrementing.
      * 
-     * @var string
+     * @var bool
      */
-    protected $primaryKey = '_newid';
+    public $incrementing = false;
 
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'orgId', 'link', 'originalImage', 'type', 'text', 'cleanText', 'name', 'caption', 'tags', 'thumbnail'];
+    protected $fillable = ['_oldid', 'orgId', 'link', 'originalImage', 'type', 'text', 'cleanText', 'name', 'caption', 'tags', 'thumbnail'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function storyAssets()
+    public function lflbStoryAssets()
     {
-        return $this->hasMany('App\Models\StoryAsset', 'asset', '_newid');
+        return $this->hasMany('App\Models\LflbStoryAsset', 'asset');
     }
 }

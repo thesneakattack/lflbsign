@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $image
  * @property string $imageUrl
  * @property string $collections
- * @property string $collections_new
  * @property string $startDay
  * @property string $startMonth
  * @property string $startYear
@@ -22,8 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $endMonth
  * @property string $endYear
  * @property string $locationName
- * @property string $location_lat
- * @property string $location_lng
+ * @property string $location.lat
+ * @property string $location.lng
  * @property string $metaData
  * @property App $app
  * @property StoryAsset[] $storyAssets
@@ -41,7 +40,7 @@ class Story extends Model
     /**
      * @var array
      */
-    protected $fillable = ['app', '_id', '_oldid', 'title', 'description', 'image', 'imageUrl', 'collections', 'collections_new', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location_lat', 'location_lng', 'metaData'];
+    protected $fillable = ['app', '_id', '_oldid', 'title', 'description', 'image', 'imageUrl', 'collections', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location.lat', 'location.lng', 'metaData'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -58,7 +57,10 @@ class Story extends Model
     {
         return $this->hasMany('App\Models\StoryAsset', 'story', '_newid')->orderBy('position', 'ASC');
     }
-
+    // public function scopePositionAscending($query)
+    // {
+    //     return $query->orderBy('position', 'ASC');
+    // }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

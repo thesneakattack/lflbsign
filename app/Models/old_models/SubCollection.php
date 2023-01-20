@@ -11,19 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $parentCollection
  * @property string $title
  * @property string $stories
+ * @property string $stories_new
  * @property string $subTitle
  * @property string $mainImage
+ * @property boolean $position
  * @property Collection $collection
  */
 class SubCollection extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'subCollections';
-
     /**
      * The primary key for the model.
      * 
@@ -34,7 +29,7 @@ class SubCollection extends Model
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'parentCollection', 'title', 'stories', 'subTitle', 'mainImage'];
+    protected $fillable = ['_id', '_oldid', 'parentCollection', 'title', 'stories', 'stories_new', 'subTitle', 'mainImage', 'position'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -47,5 +42,5 @@ class SubCollection extends Model
     public function storyIds()
     {
         return explode(',', $this->stories);
-    }
+    }    
 }

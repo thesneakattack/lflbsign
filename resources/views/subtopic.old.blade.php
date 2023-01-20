@@ -20,14 +20,14 @@
     <div class="bg-gray-100 border border-gray-300 rounded p-6">
         <div class="flex">
             @unless(empty($story['image']))
-                <a href="/stories/{{$story['_newid']}}"><img class="hidden w-48 md:block" src = "{{ asset("/assets/".$story['image']) }}" /></a>
+                <a href="/stories/{{$story['id']}}"><img class="hidden w-48 md:block" src = "{{ asset("/assets/".$story['image']) }}" /></a>
             @endunless            
             <div>
                 <h3 class="text-2xl ml-6">
-                    <a href="/stories/{{$story['_newid']}}">{{$story['title']}}</a>
+                    <a href="/stories/{{$story['id']}}">{{$story['title']}}</a>
                 </h3>
             @unless(empty($story['description']))
-                <div class="text-xl font-bold mb-4 ml-6"><a href="/stories/{{$story['_newid']}}">{{$story['description']}}</a></div>
+                <div class="text-xl font-bold mb-4 ml-6"><a href="/stories/{{$story['id']}}">{{$story['description']}}</a></div>
             @endunless 
                 {{-- <ul class="flex">
                     <li

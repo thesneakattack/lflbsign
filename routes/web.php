@@ -4,14 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\App;
-use App\Models\Asset;
-use App\Models\Collection;
-use App\Models\MetaData;
-use App\Models\Story;
-use App\Models\StoryAsset;
-use App\Models\SubCollection;
-use App\Models\Tag;
+use App\Models\LflbApp;
+use App\Models\LflbAsset;
+use App\Models\LflbCollection;
+use App\Models\LflbMetadatum;
+use App\Models\LflbStory;
+use App\Models\LflbStoryAsset;
+use App\Models\LflbSubCollection;
+use App\Models\LflbTag;
 // use App\Models\Listing;
 
 
@@ -44,7 +44,7 @@ use App\Models\Tag;
 Route::get('/preview', function () {
     return view('preview', [
         'heading' => 'Latest Topics',
-        'topics' => Collection::all(), // defined in app/Models/Topics.php        
+        'topics' => LflbCollection::all(), // defined in app/Models/Topics.php        
         'navSettings' => [
             "backHome" => false, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
@@ -59,7 +59,7 @@ Route::get('/', function () {
 
     return view('topics', [
         'heading' => 'Latest Topics',
-        'topics' => Collection::all(), // defined in app/Models/Topics.php
+        'topics' => LflbCollection::all(), // defined in app/Models/Topics.php
         'navSettings' => [
             "backHome" => true,
             "selectOk" => true,
@@ -81,8 +81,8 @@ Route::get('/topics/{id}', function($id) {
         Session::put('userDefinedTopic', $id);
 
     return view('topic', [
-        'topic' => Collection::find($id),
-        'subTopics' => SubCollection::all()->where('parentCollection', $id)->sortBy('position'),
+        'topic' => LflbCollection::find($id),
+        'subTopics' => LflbSubCollection::all()->where('parentCollection', $id)->sortBy('position'),
         'homePage' => true,
         'navSettings' => [
             "backHome" => false, //unless non default topic? javascript reset history on fallback to default topic?
@@ -95,10 +95,10 @@ Route::get('/topics/{id}', function($id) {
 
 // Single SubTopic - List All Stories
 Route::get('/subtopics/{id}', function($id) {
-        $storyIds = SubCollection::find($id)->storyIds();
+        $storyIds = LflbSubCollection::find($id)->storyIds();
     return view('subtopic', [
-        'subTopic' => SubCollection::find($id),
-        'stories' => Story::whereIn('_oldid', $storyIds)->get(),
+        'subTopic' => LflbSubCollection::find($id),
+        'stories' => LflbStory::whereIn('id', $storyIds)->get(),
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
@@ -112,8 +112,8 @@ Route::get('/subtopics/{id}', function($id) {
 Route::get('/stories/{id}', function($id) {
     $hideTabbableNav = true;
     return view('story', [
-        'story' => Story::find($id),
-        'storyAssets' => Story::find($id)->storyAssets()->with('story')->join('assets', 'assets._newid', '=', 'story_assets.asset')->get(),
+        'story' => LflbStory::find($id),
+        'storyAssets' => LflbStory::find($id)->lflbStoryAssets()->with('lflbStory')->join('lflb_assets', 'lflb_assets.id', '=', 'lflb_story_assets.asset')->get(),
         'hideTabbableNav' => $hideTabbableNav,
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?

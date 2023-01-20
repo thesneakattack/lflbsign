@@ -19,7 +19,7 @@
     @foreach($subTopics as $subTopic)
 
     @unless(empty($subTopic['mainImage']))
-        <div class="tabbable bg-laravel h-64 max-w-sm rounded overflow-hidden shadow-lg pb-4" onclick="location.href='/subtopics/{{$subTopic['_newid']}}'" style="cursor: pointer" tabindex="1">
+        <div class="tabbable bg-laravel h-64 max-w-sm rounded overflow-hidden shadow-lg pb-4" onclick="location.href='/subtopics/{{$subTopic['id']}}'" style="cursor: pointer" tabindex="1">
             <img class="object-cover w-full h-40" src = "{{ asset("/assets/".$subTopic['mainImage']) }}" />
             <div class="px-2 pt-2 text-white">
                 <div class="font-bold text-xl mb-1 leading-tight">{{$subTopic['title']}}</div>
@@ -29,7 +29,7 @@
             </div>
         </div>
     @else
-        <div class="tabbable flex justify-center items-center bg-laravel h-64 max-w-sm rounded overflow-hidden shadow-lg pb-4" onclick="location.href='/subtopics/{{$subTopic['_newid']}}'" tabindex="1">
+        <div class="tabbable flex justify-center items-center bg-laravel h-64 max-w-sm rounded overflow-hidden shadow-lg pb-4" onclick="location.href='/subtopics/{{$subTopic['id']}}'" tabindex="1">
             <div class="px-2 pt-2 text-white">
                 <div class="font-bold text-3xl mb-1 leading-tight">{{$subTopic['title']}}</div>
                 <p class="text-white leading-tight ">

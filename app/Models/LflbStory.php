@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $_newid
+ * @property integer $id
  * @property integer $app
- * @property string $_id
  * @property string $_oldid
  * @property string $title
  * @property string $description
@@ -25,45 +24,45 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $location_lat
  * @property string $location_lng
  * @property string $metaData
- * @property App $app
- * @property StoryAsset[] $storyAssets
- * @property Tag[] $tags
+ * @property LflbApp $lflbApp
+ * @property LflbStoryAsset[] $lflbStoryAssets
+ * @property LflbTag[] $lflbTags
  */
-class Story extends Model
+class LflbStory extends Model
 {
     /**
-     * The primary key for the model.
+     * Indicates if the IDs are auto-incrementing.
      * 
-     * @var string
+     * @var bool
      */
-    protected $primaryKey = '_newid';
+    public $incrementing = false;
 
     /**
      * @var array
      */
-    protected $fillable = ['app', '_id', '_oldid', 'title', 'description', 'image', 'imageUrl', 'collections', 'collections_new', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location_lat', 'location_lng', 'metaData'];
+    protected $fillable = ['app', '_oldid', 'title', 'description', 'image', 'imageUrl', 'collections', 'collections_new', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location_lat', 'location_lng', 'metaData'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function app()
+    public function lflbApp()
     {
-        return $this->belongsTo('App\Models\App', 'app', '_newid');
+        return $this->belongsTo('App\Models\LflbApp', 'app');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function storyAssets()
+    public function lflbStoryAssets()
     {
-        return $this->hasMany('App\Models\StoryAsset', 'story', '_newid')->orderBy('position', 'ASC');
+        return $this->hasMany('App\Models\LflbStoryAsset', 'story');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tags()
+    public function lflbTags()
     {
-        return $this->hasMany('App\Models\Tag', 'story', '_newid');
+        return $this->hasMany('App\Models\LflbTag', 'story');
     }
 }

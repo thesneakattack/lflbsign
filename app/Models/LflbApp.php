@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $_newid
- * @property string $_id
+ * @property integer $id
  * @property string $_oldid
  * @property string $name
  * @property string $orgId
@@ -19,27 +18,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $mapCenterAddressCoords_lng
  * @property string $mainColor
  * @property string $secondaryColor
- * @property Story[] $stories
+ * @property LflbStory[] $lflbStories
  */
-class App extends Model
+class LflbApp extends Model
 {
     /**
-     * The primary key for the model.
+     * Indicates if the IDs are auto-incrementing.
      * 
-     * @var string
+     * @var bool
      */
-    protected $primaryKey = '_newid';
+    public $incrementing = false;
 
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'name', 'orgId', 'description', 'image', 'collections', 'collections_new', 'mapCenterAddress', 'mapCenterAddressCoords_lat', 'mapCenterAddressCoords_lng', 'mainColor', 'secondaryColor'];
+    protected $fillable = ['_oldid', 'name', 'orgId', 'description', 'image', 'collections', 'collections_new', 'mapCenterAddress', 'mapCenterAddressCoords_lat', 'mapCenterAddressCoords_lng', 'mainColor', 'secondaryColor'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function stories()
+    public function lflbStories()
     {
-        return $this->hasMany('App\Models\Story', 'app', '_newid');
+        return $this->hasMany('App\Models\LflbStory', 'app');
     }
 }

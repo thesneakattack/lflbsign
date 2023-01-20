@@ -25,13 +25,13 @@
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg border-gray-300 border-1 bg-laravel text-white" tabindex="-1">
 
-                <a href="/stories/{{$story['_newid']}}" tabindex="-1">
+                <a href="/stories/{{$story['id']}}" tabindex="-1">
                     <img alt="Placeholder" class="block h-auto w-full" src="{{ asset("/assets/".$story['image']) }}" />
                 </a>
 
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                     <h1 class="text-lg font-semibold">
-                        <a class="no-underline" href="/stories/{{$story['_newid']}}" tabindex="-1">
+                        <a class="no-underline" href="/stories/{{$story['id']}}" tabindex="-1">
                             {{$story['title']}}
                         </a>
                     </h1>
@@ -48,7 +48,7 @@
                         </p>
                     </a> --}}
                     <a class="no-underline text-grey-darker hover:text-red-dark" href="#" tabindex="-1">
-                        <a href="/stories/{{$story['_newid']}}" class="tabbable bg-buttonPrimary text-white font-bold uppercase rounded-lg text-sm px-5 py-2.5 text-center" tabindex="1">View Story</a>
+                        <a href="/stories/{{$story['id']}}" class="tabbable bg-buttonPrimary text-white font-bold uppercase rounded-lg text-sm px-5 py-2.5 text-center" tabindex="1">View Story</a>
                     </a>
                 </footer>
             </article>

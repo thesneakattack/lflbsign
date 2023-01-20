@@ -16,13 +16,13 @@
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg border-gray-300 border-1 bg-laravel text-white" tabindex="-1">
 
-                <a href="/topics/{{$topic['_newid']}}" tabindex="-1">
+                <a href="/topics/{{$topic['id']}}" tabindex="-1">
                     <img alt="Placeholder" class="block h-auto w-full" src="{{ asset("/assets/".$topic['mainImage']) }}" />
                 </a>
 
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                     <h1 class="text-lg font-semibold">
-                        <a class="no-underline" href="/topics/{{$topic['_newid']}}" tabindex="-1">
+                        <a class="no-underline" href="/topics/{{$topic['id']}}" tabindex="-1">
                             {{$topic['title']}}
                         </a>
                     </h1>
@@ -39,7 +39,7 @@
                         </p>
                     </a> --}}
                     <a class="no-underline text-grey-darker hover:text-red-dark" href="#" tabindex="-1">
-                        <a href="/topics/{{$topic['_newid']}}" class="tabbable bg-buttonPrimary text-white font-bold uppercase rounded-lg text-sm px-5 py-2.5 text-center" tabindex="1">View Topic</a>
+                        <a href="/topics/{{$topic['id']}}" class="tabbable bg-buttonPrimary text-white font-bold uppercase rounded-lg text-sm px-5 py-2.5 text-center" tabindex="1">View Topic</a>
                     </a>
                 </footer>
             </article>

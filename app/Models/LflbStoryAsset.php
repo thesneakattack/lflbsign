@@ -5,49 +5,49 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $_newid
+ * @property integer $id
  * @property integer $story
  * @property integer $asset
- * @property string $_id
  * @property string $_oldid
  * @property string $caption
  * @property boolean $position
  * @property string $annotations
- * @property Story $story
- * @property Asset $asset
+ * @property LflbStory $lflbStory
+ * @property LflbAsset $lflbAsset
  */
-class StoryAsset extends Model
+class LflbStoryAsset extends Model
 {
     /**
-     * The primary key for the model.
+     * Indicates if the IDs are auto-incrementing.
      * 
-     * @var string
+     * @var bool
      */
-    protected $primaryKey = '_newid';
+    public $incrementing = false;
 
     /**
      * @var array
      */
-    protected $fillable = ['story', 'asset', '_id', '_oldid', 'caption', 'position', 'annotations'];
+    protected $fillable = ['story', 'asset', '_oldid', 'caption', 'position', 'annotations'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function story()
+    public function lflbStory()
     {
-        return $this->belongsTo('App\Models\Story', 'story', '_newid');
+        return $this->belongsTo('App\Models\LflbStory', 'story');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function asset()
+    public function lflbAsset()
     {
-        return $this->belongsTo('App\Models\Asset', 'asset', '_newid');
+        return $this->belongsTo('App\Models\LflbAsset', 'asset');
     }
 
+    // Custom code David F.
     public function scopePositionAscending($query)
     {
         return $query->orderBy('position', 'ASC');
-    }    
+    }      
 }

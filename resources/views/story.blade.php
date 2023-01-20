@@ -58,7 +58,7 @@
 
     @foreach($stories as $story)
         <h2>
-        <a href="/stories/{{$story['_newid']}}">{{$story['title']}}</a>
+        <a href="/stories/{{$story['id']}}">{{$story['title']}}</a>
         </h2>
         <p>{{$story['description']}}</p>
     @endforeach

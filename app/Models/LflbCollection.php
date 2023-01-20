@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $_newid
- * @property string $_id
+ * @property integer $id
  * @property string $_oldid
  * @property string $title
  * @property string $description
@@ -17,27 +16,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $introText
  * @property string $bodyText
  * @property string $mainImage
- * @property SubCollection[] $subCollections
+ * @property LflbSubCollection[] $lflbSubCollections
  */
-class Collection extends Model
+class LflbCollection extends Model
 {
     /**
-     * The primary key for the model.
+     * Indicates if the IDs are auto-incrementing.
      * 
-     * @var string
+     * @var bool
      */
-    protected $primaryKey = '_newid';
+    public $incrementing = false;
 
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'title', 'description', 'coverPhoto', 'subCollections', 'subCollections_new', 'featured', 'introText', 'bodyText', 'mainImage'];
+    protected $fillable = ['_oldid', 'title', 'description', 'coverPhoto', 'subCollections', 'subCollections_new', 'featured', 'introText', 'bodyText', 'mainImage'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subCollections()
+    public function lflbSubCollections()
     {
-        return $this->hasMany('App\Models\SubCollection', 'parentCollection', '_newid');
+        return $this->hasMany('App\Models\LflbSubCollection', 'parentCollection');
     }
 }

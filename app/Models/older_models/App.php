@@ -13,10 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $image
  * @property string $collections
- * @property string $collections_new
  * @property string $mapCenterAddress
- * @property string $mapCenterAddressCoords_lat
- * @property string $mapCenterAddressCoords_lng
+ * @property string $mapCenterAddressCoords.lat
+ * @property string $mapCenterAddressCoords.lng
  * @property string $mainColor
  * @property string $secondaryColor
  * @property Story[] $stories
@@ -33,7 +32,7 @@ class App extends Model
     /**
      * @var array
      */
-    protected $fillable = ['_id', '_oldid', 'name', 'orgId', 'description', 'image', 'collections', 'collections_new', 'mapCenterAddress', 'mapCenterAddressCoords_lat', 'mapCenterAddressCoords_lng', 'mainColor', 'secondaryColor'];
+    protected $fillable = ['_id', '_oldid', 'name', 'orgId', 'description', 'image', 'collections', 'mapCenterAddress', 'mapCenterAddressCoords.lat', 'mapCenterAddressCoords.lng', 'mainColor', 'secondaryColor'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

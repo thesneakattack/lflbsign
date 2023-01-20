@@ -10,13 +10,13 @@
     <div class="bg-gray-100 border border-gray-300 rounded p-6">
         <div class="flex">    
         @unless(empty($topic['mainImage']))
-            <a href="/topics/{{$topic['_newid']}}"><img class="hidden w-48 mr-6 md:block" src = "{{ asset("/assets/".$topic['mainImage']) }}" /></a>
+            <a href="/topics/{{$topic['id']}}"><img class="hidden w-48 mr-6 md:block" src = "{{ asset("/assets/".$topic['mainImage']) }}" /></a>
             @else
-            {{-- <a href="/topics/{{$topic['_newid']}}"><img class="hidden w-48 mr-6 md:block" src = "{{ asset('/storage/no-image.png') }}" /></a> --}}
+            {{-- <a href="/topics/{{$topic['id']}}"><img class="hidden w-48 mr-6 md:block" src = "{{ asset('/storage/no-image.png') }}" /></a> --}}
         @endunless
             <div>
             <h3 class="text-2xl font-bold">
-                <a href="/topics/{{$topic['_newid']}}">{{$topic['title']}}</a>
+                <a href="/topics/{{$topic['id']}}">{{$topic['title']}}</a>
             </h3>
             @unless(empty($topic['description']))
                 <div class="text-lg mb-4">{{$topic['description']}}</div>
