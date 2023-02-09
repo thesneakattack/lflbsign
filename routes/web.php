@@ -42,6 +42,7 @@ use App\Models\LflbTag;
 
 // View Preview In I-Frame
 Route::get('/preview', function () {
+    Session::flush();
     return view('preview', [
         'heading' => 'Latest Topics',
         'topics' => LflbCategory::all(), // defined in app/Models/Topics.php
@@ -50,9 +51,15 @@ Route::get('/preview', function () {
             "selectOk" => true,
             "changeTopic" => false,
             "scroll" => true // true, set to 'maybe?'
-        ]
+        ],
+        'requested_url' => request()->get('url'),
     ]);
 });
+
+
+
+
+
 
 // All Topics
 Route::get('/', function () {
