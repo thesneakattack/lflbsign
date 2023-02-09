@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 /**
  * @property integer $id
@@ -17,27 +19,46 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $caption
  * @property string $tags
  * @property string $thumbnail
- * @property LflbStoryAsset[] $lflbStoryAssets
+ * @property string $created_at
+ * @property string $updated_at
+ * @property LflbStoryPart[] $lflbStoryParts
  */
 class LflbAsset extends Model
 {
     /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
      * @var array
      */
-    protected $fillable = ['_oldid', 'orgId', 'link', 'originalImage', 'type', 'text', 'cleanText', 'name', 'caption', 'tags', 'thumbnail'];
+    protected $fillable = ['_oldid', 'orgId', 'link', 'originalImage', 'type', 'text', 'cleanText', 'name', 'caption', 'tags', 'thumbnail', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lflbStoryAssets()
+    public function lflbStoryParts()
     {
-        return $this->hasMany('App\Models\LflbStoryAsset', 'asset');
+        return $this->hasMany('App\Models\LflbStoryPart', 'asset_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function lflbStories()
+    {
+        return $this->belongsToMany(LflbStory::class, 'lflb_asset_lflb_story', 'asset_id', 'story_id')->withPivot(['position', 'caption'])->withTimestamps();
+    }
+
+    protected $guarded = [];
+    protected $casts = ['created_at' => 'datetime'];
+    // protected $with = ['lflbApp', 'lflbStoryParts'];
+
+    public function getDateForHumansAttribute()
+    {
+        return Carbon::parse($this->created_at)->diffForHumans();
+    }
+
+    public function fileUrl()
+    {
+        return $this->link
+            ? Storage::disk('public')->url($this->link)
+            : 'https://via.placeholder.com/300x150.png?text=NO%20IMAGE';
     }
 }

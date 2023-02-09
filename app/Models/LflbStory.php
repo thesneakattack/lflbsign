@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\Pivots\Category;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+// use Kirschbaum\PowerJoins\PowerJoins;
 
 /**
  * @property integer $id
- * @property integer $app
+ * @property integer $app_id
  * @property string $_oldid
  * @property string $title
  * @property string $description
  * @property string $image
  * @property string $imageUrl
- * @property string $collections
- * @property string $collections_new
+ * @property string $categories_old
+ * @property string $categories
  * @property string $startDay
  * @property string $startMonth
  * @property string $startYear
@@ -24,38 +28,35 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $location_lat
  * @property string $location_lng
  * @property string $metaData
+ * @property string $created_at
+ * @property string $updated_at
  * @property LflbApp $lflbApp
- * @property LflbStoryAsset[] $lflbStoryAssets
+ * @property LflbStoryPart[] $lflbStoryParts
  * @property LflbTag[] $lflbTags
+ * @property LflbAsset[] $lflbAssets
  */
 class LflbStory extends Model
 {
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
+    // use PowerJoins;
     /**
      * @var array
      */
-    protected $fillable = ['app', '_oldid', 'title', 'description', 'image', 'imageUrl', 'collections', 'collections_new', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location_lat', 'location_lng', 'metaData'];
+    protected $fillable = ['app_id', '_oldid', 'title', 'description', 'image', 'imageUrl', 'categories_old', 'categories', 'startDay', 'startMonth', 'startYear', 'endDay', 'endMonth', 'endYear', 'locationName', 'location_lat', 'location_lng', 'metaData', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function lflbApp()
     {
-        return $this->belongsTo('App\Models\LflbApp', 'app');
+        return $this->belongsTo('App\Models\LflbApp', 'app_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lflbStoryAssets()
+    public function lflbStoryParts()
     {
-        return $this->hasMany('App\Models\LflbStoryAsset', 'story');
+        return $this->hasMany('App\Models\LflbStoryPart', 'story_id');
     }
 
     /**
@@ -63,6 +64,51 @@ class LflbStory extends Model
      */
     public function lflbTags()
     {
-        return $this->hasMany('App\Models\LflbTag', 'story');
+        return $this->hasMany('App\Models\LflbTag', 'story_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function lflbAssets()
+    {
+        return $this->belongsToMany(LflbAsset::class, 'lflb_asset_lflb_story', 'story_id', 'asset_id')->withPivot(['position', 'caption'])->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function lflbSubCategories()
+    {
+        return $this->belongsToMany(LflbSubCategory::class, 'lflb_story_lflb_sub_category', 'lflb_story_id', 'lflb_sub_category_id')->withTimestamps();
+    }
+
+    public function lflbCategories()
+    {
+        $collection = $this->lflbSubCategories;
+        $grouped = $collection->mapToGroups(function ($item, $key) {
+            return [$item->lflbCategory->title => $item];
+        });
+        // ->map(function ($group) {
+        //     return $group->all();
+        // })->all();
+
+        return $grouped;
+    }
+
+    protected $guarded = [];
+    protected $casts = ['created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $with = ['lflbSubCategories'];
+
+    public function getDateForHumansAttribute()
+    {
+        return Carbon::parse($this->updated_at)->diffForHumans();
+    }
+
+    public function mainImageUrl()
+    {
+        return $this->image
+            ? Storage::disk('public')->url($this->image)
+            : 'https://via.placeholder.com/300x150.png?text=NO%20IMAGE';
     }
 }

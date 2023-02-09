@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\LflbApp;
 use App\Models\LflbAsset;
-use App\Models\LflbCollection;
+use App\Models\LflbCategory;
 use App\Models\LflbMetadatum;
 use App\Models\LflbStory;
-use App\Models\LflbStoryAsset;
-use App\Models\LflbSubCollection;
+use App\Models\LflbStoryPart;
+use App\Models\LflbSubCategory;
 use App\Models\LflbTag;
 // use App\Models\Listing;
 
@@ -44,13 +44,13 @@ use App\Models\LflbTag;
 Route::get('/preview', function () {
     return view('preview', [
         'heading' => 'Latest Topics',
-        'topics' => LflbCollection::all(), // defined in app/Models/Topics.php        
+        'topics' => LflbCategory::all(), // defined in app/Models/Topics.php
         'navSettings' => [
             "backHome" => false, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
             "changeTopic" => false,
             "scroll" => true // true, set to 'maybe?'
-        ]   
+        ]
     ]);
 });
 
@@ -59,7 +59,7 @@ Route::get('/', function () {
 
     return view('topics', [
         'heading' => 'Latest Topics',
-        'topics' => LflbCollection::all(), // defined in app/Models/Topics.php
+        'topics' => LflbCategory::all(), // defined in app/Models/Topics.php
         'navSettings' => [
             "backHome" => true,
             "selectOk" => true,
@@ -70,68 +70,68 @@ Route::get('/', function () {
 });
 
 // Single Topic - List All SubTopics - SIGNAGE SCREEN HOME
-Route::get('/topics/{id}', function($id) {
-    if(request()->has('defaultTopic')){
+Route::get('/topics/{id}', function ($id) {
+    if (request()->has('defaultTopic')) {
         Session::put('defaultTopic', request()->get('defaultTopic'));
-    }else{
-        if(!(session()->has('defaultTopic'))){
+    } else {
+        if (!(session()->has('defaultTopic'))) {
             Session::put('defaultTopic', $id);
         }
     }
-        Session::put('userDefinedTopic', $id);
+    Session::put('userDefinedTopic', $id);
 
     return view('topic', [
-        'topic' => LflbCollection::find($id),
-        'subTopics' => LflbSubCollection::all()->where('parentCollection', $id)->sortBy('position'),
+        'topic' => LflbCategory::find($id),
+        'subTopics' => LflbSubCategory::all()->where('category_id', $id)->sortBy('position'),
         'homePage' => true,
         'navSettings' => [
             "backHome" => false, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
             "changeTopic" => true,
             "scroll" => false // false, set to 'maybe?'
-        ]        
+        ]
     ]);
 });
 
 // Single SubTopic - List All Stories
-Route::get('/subtopics/{id}', function($id) {
-        $storyIds = LflbSubCollection::find($id)->storyIds();
+Route::get('/subtopics/{id}', function ($id) {
+    $storyIds = LflbSubCategory::find($id)->storyIds();
     return view('subtopic', [
-        'subTopic' => LflbSubCollection::find($id),
+        'subTopic' => LflbSubCategory::find($id),
         'stories' => LflbStory::whereIn('id', $storyIds)->get(),
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
             "changeTopic" => true,
             "scroll" => true // true, set to 'maybe?'
-        ]           
+        ]
     ]);
 });
 
 // Single Story - LANDING PAGE
-Route::get('/stories/{id}', function($id) {
+Route::get('/stories/{id}', function ($id) {
     $hideTabbableNav = true;
     return view('story', [
         'story' => LflbStory::find($id),
-        'storyAssets' => LflbStory::find($id)->lflbStoryAssets()->with('lflbStory')->join('lflb_assets', 'lflb_assets.id', '=', 'lflb_story_assets.asset')->get(),
+        'storyAssets' => LflbStory::find($id)->lflbAssets()->get(),
         'hideTabbableNav' => $hideTabbableNav,
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => false,
             "changeTopic" => true,
             "scroll" => true // true, set to 'maybe?'
-        ]           
+        ]
     ]);
 });
 
-Route::get('/nav', function() {
+Route::get('/nav', function () {
     return view('nav', [
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
             "changeTopic" => true,
             "scroll" => true // true, set to 'maybe?'
-        ]           
+        ]
     ]);
 });
 
@@ -156,11 +156,11 @@ Route::get('/hello', function () {
         ->header('foo', 'bar'); //add custom headers
 });
 
-Route::get('/posts/{id}', function($id){
+Route::get('/posts/{id}', function ($id) {
     return response('Post #' . $id);
 })->where('id', '[0-9]+');
 
-Route::get('/search', function(Request $request) {
+Route::get('/search', function (Request $request) {
     // dd($request);
     return ($request->name . ' ' . $request->city);
 });

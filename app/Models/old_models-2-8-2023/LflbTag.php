@@ -6,26 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
- * @property integer $story_id
+ * @property integer $story
  * @property string $_oldid
  * @property string $storyid
  * @property string $value
- * @property string $created_at
- * @property string $updated_at
  * @property LflbStory $lflbStory
  */
 class LflbTag extends Model
 {
     /**
+     * Indicates if the IDs are auto-incrementing.
+     * 
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * @var array
      */
-    protected $fillable = ['story_id', '_oldid', 'storyid', 'value', 'created_at', 'updated_at'];
+    protected $fillable = ['story', '_oldid', 'storyid', 'value'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function lflbStory()
     {
-        return $this->belongsTo('App\Models\LflbStory', 'story_id');
+        return $this->belongsTo('App\Models\LflbStory', 'story');
     }
 }

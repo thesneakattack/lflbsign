@@ -11,29 +11,34 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $orgId
  * @property string $description
  * @property string $image
- * @property string $categories
- * @property string $categories_old
+ * @property string $collections
+ * @property string $collections_new
  * @property string $mapCenterAddress
  * @property string $mapCenterAddressCoords_lat
  * @property string $mapCenterAddressCoords_lng
  * @property string $mainColor
  * @property string $secondaryColor
- * @property string $created_at
- * @property string $updated_at
  * @property LflbStory[] $lflbStories
  */
 class LflbApp extends Model
 {
     /**
+     * Indicates if the IDs are auto-incrementing.
+     * 
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * @var array
      */
-    protected $fillable = ['_oldid', 'name', 'orgId', 'description', 'image', 'categories', 'categories_old', 'mapCenterAddress', 'mapCenterAddressCoords_lat', 'mapCenterAddressCoords_lng', 'mainColor', 'secondaryColor', 'created_at', 'updated_at'];
+    protected $fillable = ['_oldid', 'name', 'orgId', 'description', 'image', 'collections', 'collections_new', 'mapCenterAddress', 'mapCenterAddressCoords_lat', 'mapCenterAddressCoords_lng', 'mainColor', 'secondaryColor'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function lflbStories()
     {
-        return $this->hasMany('App\Models\LflbStory', 'app_id');
+        return $this->hasMany('App\Models\LflbStory', 'app');
     }
 }
