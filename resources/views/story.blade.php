@@ -24,14 +24,14 @@
                 </div>
                 @elseif($storyAsset['type'] == 'IMAGE')
                 <div class="flex flex-col items-center justify-center mb-6 text-center segment-image">
-                    <img class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset(" /assets/".$storyAsset['originalImage'])
+                    <img class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['originalImage'])
                         }}" alt="">
                     <p class="text-xl font-semibold">{{$storyAsset['caption']}}</p>
                 </div>
                 @elseif($storyAsset['type'] == 'VIDEO')
                 <div class="flex flex-col items-center justify-center mb-6 text-center segment-video">
                     <p class="text-2xl font-semibold">{{$storyAsset['name']}}</p>
-                    <video class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset(" /assets/".$storyAsset['link']) }}"
+                    <video class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset("/assets/".$storyAsset['link']) }}"
                         type="video/m4v" controls controlsList="nodownload nofullscreen">
                     </video>
                     <p class="text-xl font-semibold">{{$storyAsset['caption']}}</p>

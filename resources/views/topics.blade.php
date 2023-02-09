@@ -2,8 +2,6 @@
 
 @section('content')
 @include('partials._topics_header')
-<img alt="Placeholder" class="block w-full h-auto" src="{{ asset("/assets/".'laravel-logo.png') }}" />
-<div id="contentArea" class="h-[1162px] overflow-y-auto w-full px-4 mt-4">
     <div class="gap-4 columns-2">
 
         @unless(count($topics) == 0)
