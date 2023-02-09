@@ -95,10 +95,9 @@ Route::get('/topics/{id}', function ($id) {
 
 // Single SubTopic - List All Stories
 Route::get('/subtopics/{id}', function ($id) {
-    $storyIds = LflbSubCategory::find($id)->storyIds();
     return view('subtopic', [
         'subTopic' => LflbSubCategory::find($id),
-        'stories' => LflbStory::whereIn('id', $storyIds)->get(),
+        'stories' => LflbSubCategory::find($id)->lflbStories,
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?
             "selectOk" => true,
