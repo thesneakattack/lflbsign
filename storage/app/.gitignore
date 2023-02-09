@@ -1,4 +1,5 @@
 # *
 lflbassets/
+uploads/
 !public
 !.gitignore

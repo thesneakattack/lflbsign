@@ -22,6 +22,7 @@ services:
             - ".:/var/www/html"
             - "../code/active/projects/lflb-history/lflbassets:/var/www/html/storage/app/lflbassets"
             - "../code/active/projects/lflb-history/siteimages:/var/www/html/storage/app/public"
+            - "../dashboard-app/storage/app/uploads:/var/www/html/storage/app/uploads"
         networks:
             - sail
         depends_on:
