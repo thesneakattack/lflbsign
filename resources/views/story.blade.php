@@ -25,7 +25,7 @@
                         @elseif($storyAsset['type'] == 'IMAGE')
                             <div class="flex flex-col items-center justify-center mb-6 text-center segment-image">
                                 <img class="w-fit my-6 max-h-[800px] mx-12"
-                                    src="{{ asset('/assets/' . $storyAsset['originalImage']) }}" alt="">
+                                    src="{{ asset('/assets/' . $storyAsset['link']) }}" alt="">
                                 <p class="text-xl font-semibold">{{ $storyAsset['caption'] }}</p>
                             </div>
                         @elseif($storyAsset['type'] == 'VIDEO')
