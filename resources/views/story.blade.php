@@ -10,7 +10,7 @@
                 <i class="fa-solid fa-location-dot"></i> Daytona, FL
             </div> --}}
                 {{-- <div class="w-full mb-6 border border-gray-200"></div> --}}
-                <div class="prose">
+                <div>
                     {{-- <h3 class="mb-4 text-3xl font-bold">
                     Job Description
                 </h3> --}}
