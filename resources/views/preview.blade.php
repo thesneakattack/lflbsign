@@ -9,16 +9,16 @@
     <script>
         window.addEventListener("load", () => {
             console.log('loaded');
-        document.body.style.transform = 'scale(0.5)';
-        document.body.style.transformOrigin = 'top center';
-});
+            document.body.style.transform = 'scale(0.5)';
+            document.body.style.transformOrigin = 'top center';
+        });
     </script>
 </head>
 
 <body style="background-color:#333;max-height:960px;margin:0;">
     <div>
-        <iframe src="/{{$requested_url}}" frameborder="2" width="1080" height="1920"
-            style="display:block; width:1080px; margin:0px auto;"></iframe>
+        <iframe src="/{{ $requested_url }}" style="display:block; width:1080px; margin:0px auto;" frameborder="2"
+            width="1080" height="1920"></iframe>
     </div>
 </body>
 

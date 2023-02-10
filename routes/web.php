@@ -42,7 +42,10 @@ use App\Models\LflbTag;
 
 // View Preview In I-Frame
 Route::get('/preview', function () {
-    Session::flush();
+    if (Session::has('userDefinedTopic') || Session::has('defaultTopic')) {
+        Session::flush();
+        // Session::forget('userDefinedTopic');
+    }
     return view('preview', [
         'heading' => 'Latest Topics',
         'topics' => LflbCategory::all(), // defined in app/Models/Topics.php
@@ -63,7 +66,7 @@ Route::get('/preview', function () {
 
 // All Topics
 Route::get('/', function () {
-
+    // dd(Session::all());
     return view('topics', [
         'heading' => 'Latest Topics',
         'topics' => LflbCategory::all(), // defined in app/Models/Topics.php
