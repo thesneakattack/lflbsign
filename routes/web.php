@@ -122,7 +122,7 @@ Route::get('/stories/{id}', function ($id) {
     $hideTabbableNav = true;
     return view('story', [
         'story' => LflbStory::find($id),
-        'storyAssets' => LflbStory::find($id)->lflbAssets()->get(),
+        'storyAssets' => LflbStory::find($id)->lflbAssets()->orderBy('position')->get(),
         'hideTabbableNav' => $hideTabbableNav,
         'navSettings' => [
             "backHome" => true, //unless non default topic? javascript reset history on fallback to default topic?

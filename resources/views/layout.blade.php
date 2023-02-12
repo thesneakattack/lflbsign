@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <script type="text/javascript">
         @if (Session::has('defaultTopic'))
             var defaultTopic = '{{ Session::get('defaultTopic') }}';
