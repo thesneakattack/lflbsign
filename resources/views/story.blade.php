@@ -27,7 +27,7 @@
                         <div class="flex flex-col items-center justify-center mb-6 text-center segment-image">
                             <img class="w-fit my-6 max-h-[800px] mx-12" src="{{ asset('/assets/' . $storyAsset['link']) }}"
                                 alt="">
-                            <div class="prose prose-xl max-w-none">{{ $storyAsset['caption'] }}</div>
+                            <div class="font-semibold prose prose-xl max-w-none">{{ $storyAsset['caption'] }}</div>
                         </div>
                     @elseif($storyAsset['type'] == 'VIDEO')
                         <div class="flex flex-col items-center justify-center mb-6 text-center segment-video">
@@ -36,7 +36,7 @@
                                 src="{{ asset('/assets/' . $storyAsset['link']) }}" type="video/m4v" controls
                                 controlsList="nodownload nofullscreen">
                             </video>
-                            <div class="prose prose-xl max-w-none">{{ $storyAsset['caption'] }}</div>
+                            <div class="font-semibold prose prose-xl max-w-none">{{ $storyAsset['caption'] }}</div>
                         </div>
                     @elseif($storyAsset['type'] == 'YOUTUBE')
                         <div class="flex flex-col items-center justify-center mb-6 text-center segment-youtube">
