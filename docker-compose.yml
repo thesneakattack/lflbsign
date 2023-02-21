@@ -20,9 +20,9 @@ services:
             XDEBUG_CONFIG: "${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}"
         volumes:
             - ".:/var/www/html"
-            - "../code/active/projects/lflb-history/lflbassets:/var/www/html/storage/app/lflbassets"
-            - "../code/active/projects/lflb-history/siteimages:/var/www/html/storage/app/public"
-            - "../dashboard-app/storage/app/uploads:/var/www/html/storage/app/uploads"
+            # - "../code/active/projects/lflb-history/lflbassets:/var/www/html/storage/app/lflbassets"
+            # - "../code/active/projects/lflb-history/siteimages:/var/www/html/storage/app/public"
+            # - "../dashboard-app/storage/app/uploads:/var/www/html/storage/app/uploads"
         networks:
             - sail
         depends_on:
