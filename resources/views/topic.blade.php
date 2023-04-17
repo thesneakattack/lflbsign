@@ -12,7 +12,7 @@
 
 
 <div class="absolute bottom-[12rem] w-full">
-    <div class="place-content-center lg:grid lg:grid-cols-3 gap-4 space-y-4 md:space-y-0 mx-4">
+    <div class="flex flex-wrap gap-4 place-content-center">
 
 @unless(count($subTopics) == 0)
 
