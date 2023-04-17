@@ -12,7 +12,7 @@
 
 
     <div class="absolute bottom-[12rem] w-full">
-        <div class="gap-4 mx-4 space-y-4 place-content-center lg:grid lg:grid-cols-3 md:space-y-0">
+        <div class="flex flex-wrap gap-4 place-content-center">
 
             @unless (count($subTopics) == 0)
                 @foreach ($subTopics as $subTopic)
