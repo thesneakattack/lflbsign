@@ -15,7 +15,7 @@ module.exports = {
                     raw: "((max-width: 1080px) and (max-height: 1920px))",
                 },
                 "lfd-1920h": {
-                    raw: "((max-width: 1080px) and (max-height: 1920px))",
+                    raw: "((max-width: 1920px) and (max-height: 1080px))",
                 },
             },
         },
